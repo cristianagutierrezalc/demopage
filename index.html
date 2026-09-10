@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Digital | Fuego & Carbón</title>
+    <!-- Favicon principal optimizado -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img.png">
+    <link rel="apple-touch-icon" href="img.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-card: rgba(24, 24, 27, 0.92);
+            --bg-card-border: rgba(255, 255, 255, 0.12);
+            --primary: #f97316;
+            --primary-hover: #ea580c;
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            --accent-green: #22c55e;
+            --accent-green-bg: rgba(34, 197, 94, 0.12);
+            --accent-green-border: rgba(34, 197, 94, 0.3);
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68,0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+            margin: 16px 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        body { 
+            background-color: #0c0c0e;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><g fill="none" stroke="%2327272a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15,35 C15,25 35,25 35,35 Z M12,35 L38,35 M15,35 L15,42 C15,45 35,45 35,42 L35,35 M20,38 L30,38"/><path d="M85,15 L95,15 L92,40 L88,40 Z M83,22 L97,22 M85,15 L80,10"/><path d="M15,85 L35,85 L38,105 L12,105 Z M18,85 L25,85 L25,75 M32,85 L30,78"/><path d="M75,80 L105,80 L90,108 Z M80,89 C83,89 83,93 80,93 M92,92 L92,97"/><path d="M55,20 C50,15 50,25 55,28 C60,25 60,15 55,20 Z M55,28 L55,33"/><circle cx="60" cy="95" r="8"/><path d="M60,83 L60,87 M68,95 L72,95 M60,103 L60,107 M52,95 L48,95"/></g></svg>');
+            background-repeat: repeat;
+            background-size: 130px 130px;
+            color: var(--text-main); 
+            padding-bottom: 120px; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh;
+        }
+
+        .app-container { 
+            width: 100%; 
+            max-width: 520px; 
+            position: relative; 
+        }
+
+        .header-card {
+            margin: 16px 16px 8px 16px;
+            background: rgba(24, 24, 27, 0.95);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 24px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .header-cover {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #1c1917 0%, #09090b 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--bg-card-border);
+        }
+
+        .cover-title {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: rgba(249, 115, 22, 0.35);
+            text-transform: uppercase;
+        }
+
+        .logo-wrapper {
+            position: absolute;
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: #18181b;
+            border: 3px solid #27272a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+            z-index: 10;
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 800;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-wrapper:hover {
+            transform: translateX(-50%) scale(1.05) rotate(5deg);
+        }
+
+        .restaurant-info {
+            text-align: center;
+            padding: 42px 16px 18px 16px;
+        }
+
+        .brand-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #d4d4d8;
+            margin-bottom: 6px;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .info-icon {
+            width: 16px;
+            height: 16px;
+            stroke: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .status-box {
+            background: var(--accent-green-bg);
+            border: 1px solid var(--accent-green-border);
+            border-radius: 18px;
+            padding: 14px 18px;
+            margin: 10px 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            backdrop-filter: blur(12px);
+            transition: transform 0.2s ease;
+        }
+
+        .status-box.closed {
+            background: var(--danger-bg);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .status-box:hover {
+            transform: translateY(-2px);
+        }
+
+        .status-icon {
+            width: 20px;
+            height: 20px;
+            stroke: #4ade80;
+            flex-shrink: 0;
+        }
+
+        .status-box.closed .status-icon {
+            stroke: #f87171;
+        }
+
+        .status-text {
+            font-size: 13px;
+            color: #f0fdf4;
+            line-height: 1.45;
+            font-weight: 500;
+        }
+
+        .status-box.closed .status-text {
+            color: #fee2e2;
+        }
+
+        .status-text strong {
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        .status-box.closed .status-text strong {
+            color: #f87171;
+        }
+
+        .search-container {
+            padding: 8px 16px 12px 16px;
+        }
+
+        .search-box {
+            width: 100%;
+            background: rgba(24, 24, 27, 0.95);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 25px;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+        }
+
+        .search-icon {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-muted);
+        }
+
+        .search-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .categories-bar { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 8px; 
+            padding: 8px 16px 16px 16px; 
+            margin: 0;
+            width: 100%;
+        }
+
+        .cat-btn { 
+            background: rgba(24, 24, 27, 0.9); 
+            color: var(--text-muted); 
+            border: 1px solid var(--bg-card-border); 
+            padding: 8px 14px; 
+            border-radius: 12px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cat-btn:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .cat-btn:active {
+            transform: scale(0.95);
+        }
+
+        .cat-btn.active { 
+            background: linear-gradient(135deg, var(--primary), #c2410c); 
+            color: #fff; 
+            border-color: transparent; 
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .products-section { 
+            padding: 0 16px; 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 14px; 
+        }
+
+        .product-card { 
+            display: flex; 
+            gap: 14px; 
+            background: var(--bg-card); 
+            border: 1px solid var(--bg-card-border); 
+            border-radius: 20px; 
+            padding: 14px; 
+            align-items: center; 
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(249, 115, 22, 0.4);
+            box-shadow: 0 15px 35px rgba(249, 115, 22, 0.15);
+        }
+
+        .product-img-wrapper {
+            width: 95px;
+            height: 95px;
+            border-radius: 14px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #27272a;
+        }
+
+        .product-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+
+        .product-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; height: 95px; }
+        .product-title { font-size: 14px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .product-desc { font-size: 11px; color: var(--text-muted); display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 3px; line-height: 1.4; }
+        .product-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .price { font-size: 16px; font-weight: 800; color: #fb923c; }
+
+        .add-btn { 
+            width: 34px; 
+            height: 34px; 
+            border-radius: 12px; 
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover)); 
+            color: #fff; 
+            border: none; 
+            font-size: 18px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(249, 115, 22, 0.5);
+        }
+
+        .add-btn:active {
+            transform: scale(0.9);
+        }
+
+        .cart-floating-container { 
+            position: fixed; 
+            bottom: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: calc(100% - 32px); 
+            max-width: 480px; 
+            z-index: 20; 
+            animation: bounceUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes bounceUp {
+            from { transform: translate(-50%, 50px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+
+        .cart-btn { 
+            width: 100%; 
+            background: linear-gradient(90deg, #f97316, #eab308); 
+            color: #fff; 
+            border: none; 
+            padding: 16px 20px; 
+            border-radius: 18px; 
+            font-size: 14px; 
+            font-weight: 800; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 12px 30px rgba(249, 115, 22, 0.5); 
+            cursor: pointer; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cart-btn.closed-btn {
+            background: #27272a;
+            color: var(--text-muted);
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .cart-btn:hover:not(.closed-btn) {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(249, 115, 22, 0.7);
+        }
+
+        .cart-btn:active:not(.closed-btn) {
+            transform: scale(0.98);
+        }
+
+        .modal { 
+            display: flex; 
+            opacity: 0; 
+            pointer-events: none; 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0, 0, 0, 0.85); 
+            backdrop-filter: blur(12px); 
+            z-index: 50; 
+            align-items: flex-end; 
+            justify-content: center; 
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active { opacity: 1; pointer-events: auto; }
+
+        .modal-content { 
+            background: #18181b; 
+            border: 1px solid var(--bg-card-border); 
+            width: 100%; 
+            max-width: 520px; 
+            border-radius: 28px 28px 0 0; 
+            padding: 18px 20px; 
+            max-height: 94vh; 
+            overflow-y: auto; 
+            overflow-x: hidden;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+            position: relative;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.1, 1, 0.1, 1);
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 8px;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .close-modal-btn {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            color: var(--text-muted);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .close-modal-btn:hover { background: rgba(255,255,255,0.15); color: #fff; transform: rotate(90deg); }
+
+        .section-subtitle {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            margin-top: 8px;
+        }
+
+        .cart-items-container {
+            max-height: 120px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin-bottom: 8px;
+            padding-right: 2px;
+        }
+
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .cart-item-row:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .cart-item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            flex: 1;
+            padding-right: 12px;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .cart-item-price {
+            color: #fb923c;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .remove-item-btn {
+            background: var(--danger-bg);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .remove-item-btn:hover {
+            background: var(--danger);
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .form-input, .form-select { 
+            width: 100%; 
+            background: #27272a; 
+            border: 1px solid var(--bg-card-border); 
+            padding: 10px 12px; 
+            border-radius: 10px; 
+            color: #fff; 
+            font-size: 12px; 
+            margin-bottom: 6px; 
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-input:focus, .form-select:focus { 
+            border-color: var(--primary); 
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+        }
+
+        .form-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+            display: block;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .totals-card {
+            background: rgba(249, 115, 22, 0.05);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            color: var(--text-muted);
+        }
+
+        .total-row.grand {
+            border-top: 1px dashed rgba(249, 115, 22, 0.3);
+            padding-top: 6px;
+            margin-top: 4px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .total-row.grand span:last-child {
+            color: var(--primary);
+        }
+
+        .confirm-btn { 
+            width: 100%; 
+            background: linear-gradient(135deg, #22c55e, #16a34a); 
+            color: #fff; 
+            border: none; 
+            padding: 12px; 
+            border-radius: 12px; 
+            font-weight: 800; 
+            font-size: 13px; 
+            cursor: pointer; 
+            margin-top: 4px; 
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .confirm-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.5);
+        }
+
+        .confirm-btn:active {
+            transform: scale(0.98);
+        }
+
+        @media (min-width: 768px) {
+            .app-container { max-width: 860px; }
+            .products-section { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .cart-floating-container { max-width: 420px; }
+            .modal { align-items: center; }
+            .modal-content { border-radius: 28px; transform: scale(0.9); transition: transform 0.3s ease; }
+            .modal.active .modal-content { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header-card">
+            <div class="header-cover">
+                <div class="cover-title">FUEGO & CARBÓN</div>
+                <div class="logo-wrapper">FC</div>
+            </div>
+
+            <div class="restaurant-info">
+                <h1 class="brand-title">Fuego & Carbón</h1>
+                <div class="info-item">
+                    <svg class="info-icon" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg>
+                    <span>Sede Principal — Calle 15 #24-10, Centro</span>
+                </div>
+                <div class="info-item">
+                    <svg class="info-icon" fill="none" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                    <span>Atención: Lunes a Sábados de 5:00 PM a 11:30 PM</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="status-box" id="status-box">
+            <svg class="status-icon" id="status-icon" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div class="status-text" id="status-text">
+                Verificando horario...
+            </div>
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <svg class="search-icon" fill="none" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="search-input" class="search-input" placeholder="Buscar por plato o ingrediente..." oninput="handleSearch()">
+            </div>
+        </div>
+
+        <nav class="categories-bar">
+            <button class="cat-btn active" onclick="filterCategory('Más Vendidas', this)">Más Vendidas</button>
+            <button class="cat-btn" onclick="filterCategory('Combos', this)">Combos</button>
+            <button class="cat-btn" onclick="filterCategory('Hamburguesas', this)">Hamburguesas</button>
+            <button class="cat-btn" onclick="filterCategory('Salchipapas', this)">Salchipapas</button>
+            <button class="cat-btn" onclick="filterCategory('Perros Calientes', this)">Perros Calientes</button>
+            <button class="cat-btn" onclick="filterCategory('Picadas', this)">Picadas</button>
+            <button class="cat-btn" onclick="filterCategory('Patacones Rellenos', this)">Patacones Rellenos</button>
+            <button class="cat-btn" onclick="filterCategory('Pizzas', this)">Pizzas</button>
+            <button class="cat-btn" onclick="filterCategory('Acompañamientos', this)">Acompañamientos</button>
+            <button class="cat-btn" onclick="filterCategory('Bebidas', this)">Bebidas</button>
+        </nav>
+
+        <main class="products-section" id="products-list"></main>
+
+        <div class="cart-floating-container">
+            <button class="cart-btn" id="main-cart-btn" onclick="openCheckout()">
+                <span id="cart-count">Ver pedido (0)</span>
+                <span id="cart-total">$0</span>
+            </button>
+        </div>
+
+        <div class="modal" id="checkout-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">Finalizar Pedido</div>
+                    <button class="close-modal-btn" onclick="closeCheckout()">✕</button>
+                </div>
+
+                <div class="section-subtitle">1. Productos seleccionados</div>
+                <div id="cart-items" class="cart-items-container"></div>
+
+                <div class="section-subtitle">2. Datos de entrega y contacto</div>
+                <div class="form-grid">
+                    <div>
+                        <label class="form-label">Nombre *</label>
+                        <input type="text" id="cust-name" class="form-input" placeholder="Tu nombre">
+                    </div>
+                    <div>
+                        <label class="form-label">WhatsApp *</label>
+                        <input type="tel" id="cust-phone" class="form-input" placeholder="Ej: 3188441670">
+                    </div>
+                </div>
+
+                <label class="form-label">Tipo de servicio *</label>
+                <select id="fulfillment-type" class="form-select" onchange="toggleDeliveryFields()">
+                    <option value="domicilio">Domicilio (+$5.000)</option>
+                    <option value="recoger">Pasar a recoger por el local</option>
+                </select>
+
+                <div id="address-container">
+                    <label class="form-label">Dirección exacta *</label>
+                    <input type="text" id="cust-address" class="form-input" placeholder="Calle, Barrio, Número de casa">
+                </div>
+
+                <label class="form-label">Método de pago *</label>
+                <select id="payment-method" class="form-select">
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Nequi">Nequi</option>
+                    <option value="Daviplata">Daviplata</option>
+                    <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+                </select>
+
+                <div class="totals-card" id="cart-summary-totals"></div>
+
+                <button class="confirm-btn" onclick="sendOrder()">Confirmar y Enviar por WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const allProducts = [
+            { id: 101, category: "Combos", name: "Combo Dúo Fuego", price: 49900, desc: "2 Hamburguesas Clásicas + Papas francesas grandes + 2 Coca Colas de 400ml.", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=300" },
+            { id: 102, category: "Combos", name: "Combo Familiar Parrillero", price: 89900, desc: "1 Picada personal + 1 Salchipapa Salvaje + 1 Pizza Personal + 1 GASEOSA 1.5L.", image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=300" },
+            { id: 103, category: "Combos", name: "Combo Personal Todo Terreno", price: 31900, desc: "1 Hamburguesa BBQ Crispy + Papas rústicas + Limonada natural de la casa.", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" },
+            { id: 1, category: "Más Vendidas", name: "Hamburguesa Clásica Fuego", price: 24900, desc: "Carne de res 150g, queso cheddar, lechuga, tomate y salsa especial.", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" },
+            { id: 2, category: "Más Vendidas", name: "Salchipapa Salvaje (2 Pers)", price: 34900, desc: "Papas francesas, salchicha manguera, carne desmechada, queso costeño y maicitos.", image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=300" },
+            { id: 3, category: "Más Vendidas", name: "Patacón Trifásico", price: 28900, desc: "Patacón gigante con carne desmechada, pollo, chicharrón, queso costeño y suero.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=300" },
+            { id: 4, category: "Hamburguesas", name: "Hamburguesa Clásica Fuego", price: 24900, desc: "Carne de res 150g, queso cheddar, lechuga, tomate y salsa especial.", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" },
+            { id: 5, category: "Hamburguesas", name: "Hamburguesa Doble Queso & Tocino", price: 32900, desc: "Doble carne 300g, doble queso, tocino crujiente y cebolla caramelizada.", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=300" },
+            { id: 6, category: "Hamburguesas", name: "Hamburguesa BBQ Crispy", price: 28900, desc: "Carne 150g, aros de cebolla crocantes, salsa BBQ ahumada y queso gouda.", image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=300" },
+            { id: 7, category: "Hamburguesas", name: "Hamburguesa Mex-Jalapeño", price: 27900, desc: "Carne de res, queso pepper jack, jalapeños, guacamole y totopos picados.", image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=300" },
+            { id: 8, category: "Hamburguesas", name: "Hamburguesa Mushroom Swiss", price: 29900, desc: "Carne de res 150g, champiñones salteados en mantequilla y queso suizo.", image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=300" },
+            { id: 9, category: "Hamburguesas", name: "Hamburguesa Chicken Crispy", price: 25900, desc: "Pechuga de pollo apanada, ensalada coleslaw, pepinillos y mayonesa ajo.", image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=300" },
+            { id: 10, category: "Hamburguesas", name: "Hamburguesa Veggie Black Bean", price: 26900, desc: "Medallón de fríjoles negros y avena, aguacate, rúcula y tomate seco.", image: "https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?w=300" },
+            { id: 11, category: "Hamburguesas", name: "Hamburguesa Triple Beast", price: 39900, desc: "Triple carne 450g, triple queso cheddar, tocino ahumado y salsa secreta.", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" },
+            { id: 12, category: "Hamburguesas", name: "Hamburguesa Blue Cheese", price: 31900, desc: "Carne de res, queso azul fundido, cebolla caramelizada al vino tinto.", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=300" },
+            { id: 13, category: "Hamburguesas", name: "Hamburguesa Pulled Pork BBQ", price: 28900, desc: "Cerdo desmechado en cocción lenta, salsa BBQ casera y cebolla morada.", image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=300" },
+            { id: 34, category: "Salchipapas", name: "Salchipapa Tradicional", price: 18900, desc: "Cama de papas francesas, salchicha premium, queso costeño rallado y salsas.", image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=300" },
+            { id: 35, category: "Salchipapas", name: "Salchipapa Salvaje (2 Pers)", price: 34900, desc: "Papas francesas, salchicha manguera, carne desmechada, queso costeño y maicitos.", image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=300" },
+            { id: 36, category: "Salchipapas", name: "Salchipapa Costeña Especial", price: 29900, desc: "Papas rústicas, salchicha, pollo desmechado, tocineta, queso gratinado y suero.", image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" },
+            { id: 37, category: "Perros Calientes", name: "Perro Americano Clásico", price: 16900, desc: "Salchicha americana, pepinillos, cebolla picada, mostaza dulce y ketchup.", image: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=300" },
+            { id: 38, category: "Perros Calientes", name: "Perro Mexicano Picante", price: 19900, desc: "Salchicha premium, chili con carne, jalapeños, queso cheddar y guacamole.", image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=300" },
+            { id: 39, category: "Perros Calientes", name: "Perro Especial con Tocineta", price: 21900, desc: "Salchicha envuelta en tocineta, queso mozzarella fundido, papa ripia y salsa verde.", image: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=300" },
+            { id: 40, category: "Picadas", name: "Picada Personal Fuego & Carbón", price: 32900, desc: "Lomo de res, pechuga de pollo, chorizo, chicharrón, papas criollas y arepitas.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=300" },
+            { id: 41, category: "Picadas", name: "Picada Familiar (3-4 Personas)", price: 79900, desc: "Abundante selección de carnes al carbón, costillitas BBQ, yuca frita, patacón y guasacaca.", image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=300" },
+            { id: 42, category: "Patacones Rellenos", name: "Patacón Trifásico", price: 28900, desc: "Patacón gigante con carne desmechada, pollo, chicharrón, queso costeño y suero.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=300" },
+            { id: 43, category: "Patacones Rellenos", name: "Patacón Ranchero", price: 26900, desc: "Patacón tostado con pollo desmechado, maíz tierno, tocineta crujiente y queso fundido.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=300" },
+            { id: 44, category: "Pizzas", name: "Pizza Pepperoni Fuego (Personal)", price: 22900, desc: "Salsa de tomate casera, queso mozzarella abundante y dobles rodajas de pepperoni.", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300" },
+            { id: 45, category: "Pizzas", name: "Pizza Hawaiana Especial (Personal)", price: 21900, desc: "Masa artesanal, jamón seleccionado, piña calada en almíbar y queso mozzarella.", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300" },
+            { id: 46, category: "Pizzas", name: "Pizza Carnívora (Personal)", price: 25900, desc: "Cargada con carne molida artesanal, tocineta, chorizo santarrosano y jamón.", image: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=300" },
+            { id: 14, category: "Acompañamientos", name: "Papas Rústicas Suprema", price: 14900, desc: "Papas rústicas con queso cheddar fundido y trozos de tocino.", image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" },
+            { id: 15, category: "Acompañamientos", name: "Papas Francesas Clásicas", price: 9900, desc: "Papas fritas en corte tradicional doradas y crujientes con sal marina.", image: "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=300" },
+            { id: 16, category: "Acompañamientos", name: "Aros de Cebolla Crocantes", price: 12900, desc: "Aros de cebolla apanados acompañados de salsa BBQ de la casa.", image: "https://images.unsplash.com/photo-1639024471283-03518883512d?w=300" },
+            { id: 17, category: "Acompañamientos", name: "Nuggets de Pollo X8", price: 13900, desc: "Trozos de pechuga apanados acompañados de salsa miel mostaza.", image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=300" },
+            { id: 18, category: "Acompañamientos", name: "Dedos de Queso Mozzarella", price: 15900, desc: "6 bastones de mozzarella empanizados con salsa marinara casera.", image: "https://images.unsplash.com/photo-1531749668029-2db88e4276c7?w=300" },
+            { id: 19, category: "Acompañamientos", name: "Papas Trufadas con Parmesano", price: 17900, desc: "Papas delgadas bañadas en aceite de trufa y queso parmesano rallado.", image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" },
+            { id: 20, category: "Acompañamientos", name: "Nachos con Queso y Guacamole", price: 16900, desc: "Totopos de maíz crujientes con queso cheddar fundido y guacamole fresco.", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=300" },
+            { id: 21, category: "Acompañamientos", name: "Alitas BBQ X6", price: 19900, desc: "Alitas de pollo bañadas en salsa BBQ dulce ahumada.", image: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=300" },
+            { id: 22, category: "Acompañamientos", name: "Alitas Spicy Buffalo X6", price: 19900, desc: "Alitas de pollo picantes estilo Buffalo con aderezo blue cheese.", image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=300" },
+            { id: 23, category: "Acompañamientos", name: "Mazorca Dulce a la Parrilla", price: 8900, desc: "Mazorca desgranada con mantequilla, queso costeño y papitas fosforito.", image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=300" },
+            { id: 24, category: "Bebidas", name: "Coca Cola Personal 400ml", price: 5500, desc: "Refresco helado en botella plástica.", image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=300" },
+            { id: 25, category: "Bebidas", name: "Coca Cola Zero 400ml", price: 5500, desc: "Sabor original sin azúcar.", image: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=300" },
+            { id: 26, category: "Bebidas", name: "Limonada Natural", price: 7900, desc: "Zumo de limón recién exprimido con toque de menta.", image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300" },
+            { id: 27, category: "Bebidas", name: "Limonada Cerezada", price: 8900, desc: "Limonada natural frapeada con almíbar de cereza.", image: "https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?w=300" },
+            { id: 28, category: "Bebidas", name: "Limonada de Coco", price: 9900, desc: "Mezcla cremosa de leche de coco y limón natural.", image: "https://images.unsplash.com/photo-1546171753-97d7676e4602?w=300" },
+            { id: 29, category: "Bebidas", name: "Malteada de Chocolate", price: 12900, desc: "Helado artesanal de chocolate con crema batida y chispas.", image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300" },
+            { id: 30, category: "Bebidas", name: "Malteada de Vainilla & Oreo", price: 13900, desc: "Helado de vainilla batido con trozos de galleta Oreo.", image: "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=300" },
+            { id: 31, category: "Bebidas", name: "Cerveza Artesanal IPA", price: 11900, desc: "Cerveza local amarga con notas cítricas 330ml.", image: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300" },
+            { id: 32, category: "Bebidas", name: "Cerveza Club Colombia Dorada", price: 7500, desc: "Cerveza tipo Lager 330ml.", image: "https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=300" },
+            { id: 33, category: "Bebidas", name: "Agua Mineral con Gas 500ml", price: 4500, desc: "Agua de manantial refrescante y con gas.", image: "https://images.unsplash.com/photo-1560023907-5f339617ea30?w=300" }
+        ];
+
+        let cart = [];
+        let currentCategory = 'Más Vendidas';
+        const deliveryFee = 5000;
+        let isRestaurantOpen = false;
+
+        function checkOpenStatus() {
+            const now = new Date();
+            const day = now.getDay(); // 0 = Domingo, 1 = Lunes, 2 = Martes ... 6 = Sábado
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const currentTimeMinutes = hours * 60 + minutes;
+
+            // Horario: Lunes (1) a Sábado (6) de 5:00 PM (17:00) a 11:30 PM (23:30)
+            const openingTime = 17 * 60; // 5:00 PM
+            const closingTime = 23 * 60 + 30; // 11:30 PM
+
+            const isDayAllowed = (day >= 1 && day <= 6);
+            const isHourAllowed = currentTimeMinutes >= openingTime && currentTimeMinutes <= closingTime;
+
+            isRestaurantOpen = isDayAllowed && isHourAllowed;
+
+            const statusBox = document.getElementById('status-box');
+            const statusIcon = document.getElementById('status-icon');
+            const statusText = document.getElementById('status-text');
+            const mainCartBtn = document.getElementById('main-cart-btn');
+
+            if (isRestaurantOpen) {
+                statusBox.classList.remove('closed');
+                statusIcon.innerHTML = '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>';
+                statusText.innerHTML = '¡Estamos <strong>Abiertos</strong>! Pide ahora y te confirmaremos el despacho de inmediato.';
+                mainCartBtn.classList.remove('closed-btn');
+            } else {
+                statusBox.classList.add('closed');
+                statusIcon.innerHTML = '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>';
+                statusText.innerHTML = 'Restaurante <strong>Cerrado</strong>. Abrimos de Lunes a Sábados de 5:00 PM a 11:30 PM.';
+                mainCartBtn.classList.add('closed-btn');
+            }
+        }
+
+        function renderProducts(products) {
+            const container = document.getElementById('products-list');
+            if(products.length === 0) {
+                container.innerHTML = `<p style="text-align:center; color: var(--text-muted); font-size:13px; grid-column: 1 / -1; padding: 30px 0;">No se encontraron productos.</p>`;
+                return;
+            }
+            container.innerHTML = products.map(p => `
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img src="${p.image}" class="product-img" alt="${p.name}">
+                    </div>
+                    <div class="product-info">
+                        <div>
+                            <div class="product-title">${p.name}</div>
+                            <div class="product-desc">${p.desc}</div>
+                        </div>
+                        <div class="product-bottom">
+                            <span class="price">$${p.price.toLocaleString('es-CO')}</span>
+                            <button class="add-btn" onclick="addToCart('${p.name}', ${p.price})">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCategory(category, element) {
+            currentCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            if(element) element.classList.add('active');
+            document.getElementById('search-input').value = '';
+            renderProducts(allProducts.filter(p => p.category === category));
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            if(query.trim() === '') {
+                filterCategory(currentCategory);
+                return;
+            }
+            renderProducts(allProducts.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query)));
+        }
+
+        function addToCart(name, price) {
+            if (!isRestaurantOpen) {
+                alert('El restaurante se encuentra cerrado en este momento. No se pueden agregar productos hasta que volvamos a abrir.');
+                return;
+            }
+            cart.push({ name, price });
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            renderCartModalItems();
+            updateModalTotals();
+            if(cart.length === 0) closeCheckout();
+        }
+
+        function updateCartUI() {
+            const total = cart.reduce((acc, curr) => acc + curr.price, 0);
+            document.getElementById('cart-count').innerText = `Ver pedido (${cart.length})`;
+            document.getElementById('cart-total').innerText = `$${total.toLocaleString('es-CO')}`;
+        }
+
+        function toggleDeliveryFields() {
+            const type = document.getElementById('fulfillment-type').value;
+            document.getElementById('address-container').style.display = (type === 'recoger') ? 'none' : 'block';
+            updateModalTotals();
+        }
+
+        function updateModalTotals() {
+            const subtotal = cart.reduce((acc, curr) => acc + curr.price, 0);
+            const type = document.getElementById('fulfillment-type').value;
+            const currentDelivery = (type === 'domicilio') ? deliveryFee : 0;
+            const grandTotal = subtotal + currentDelivery;
+
+            document.getElementById('cart-summary-totals').innerHTML = `
+                <div class="total-row"><span>Subtotal productos:</span> <b>$${subtotal.toLocaleString('es-CO')}</b></div>
+                <div class="total-row"><span>Servicio de entrega:</span> <b>${currentDelivery > 0 ? '$' + currentDelivery.toLocaleString('es-CO') : 'Gratis (Recoges)'}</b></div>
+                <div class="total-row grand"><span>Total a pagar:</span> <span>$${grandTotal.toLocaleString('es-CO')}</span></div>
+            `;
+        }
+
+        function renderCartModalItems() {
+            const container = document.getElementById('cart-items');
+            if(cart.length === 0) {
+                container.innerHTML = `<p style="text-align:center; color:var(--text-muted); font-size:12px; padding: 10px 0;">Tu carrito está vacío</p>`;
+                return;
+            }
+            container.innerHTML = cart.map((i, index) => `
+                <div class="cart-item-row">
+                    <div class="cart-item-info">
+                        <span class="cart-item-name">${i.name}</span>
+                        <span class="cart-item-price">$${i.price.toLocaleString('es-CO')}</span>
+                    </div>
+                    <button class="remove-item-btn" onclick="removeFromCart(${index})" title="Eliminar producto">✕</button>
+                </div>
+            `).join('');
+        }
+
+        function openCheckout() {
+            if (!isRestaurantOpen) {
+                alert('El restaurante está cerrado. No puedes realizar pedidos en este momento.');
+                return;
+            }
+            if(cart.length === 0) return alert('El carrito está vacío');
+            document.getElementById('checkout-modal').classList.add('active');
+            renderCartModalItems();
+            toggleDeliveryFields();
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').classList.remove('active');
+        }
+
+        function sendOrder() {
+            if (!isRestaurantOpen) {
+                alert('Lo sentimos, el restaurante acaba de cerrar o está cerrado.');
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            let fulfillment = document.getElementById('fulfillment-type').value;
+            const address = document.getElementById('cust-address').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+
+            if(!name || !phone) return alert('Por favor ingresa tu nombre y teléfono.');
+            if(fulfillment === 'domicilio' && !address) return alert('Por favor ingresa la dirección de entrega para el domicilio.');
+
+            const subtotal = cart.reduce((acc, curr) => acc + curr.price, 0);
+            const currentDelivery = (fulfillment === 'domicilio') ? deliveryFee : 0;
+            const total = subtotal + currentDelivery;
+
+            let msg = `NUEVO PEDIDO - FUEGO & CARBON\n-------------------\n`;
+            msg += `Cliente: ${name}\nTel: ${phone}\n`;
+            msg += `Tipo de entrega: ${fulfillment === 'domicilio' ? 'Domicilio' : 'Pasa a recoger'}\n`;
+            if(fulfillment === 'domicilio') msg += `Dirección: ${address}\n`;
+            msg += `Método de pago: ${paymentMethod}\n-------------------\nPRODUCTOS:\n`;
+            cart.forEach(i => msg += `- ${i.name} - $${i.price.toLocaleString('es-CO')}\n`);
+            msg += `-------------------\nSubtotal: $${subtotal.toLocaleString('es-CO')}\n`;
+            if(fulfillment === 'domicilio') msg += `Domicilio: $${deliveryFee.toLocaleString('es-CO')}\n`;
+            msg += `TOTAL A PAGAR: $${total.toLocaleString('es-CO')}`;
+
+            window.open(`https://wa.me/573188441670?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        checkOpenStatus();
+        setInterval(checkOpenStatus, 60000);
+        filterCategory('Más Vendidas');
+    </script>
+</body>
+</html>
